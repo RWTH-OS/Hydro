@@ -3,7 +3,7 @@ This namelist contains various input parameters for HYDRO runs
 &RUN
 tend=200
 #noutput=10
-#nstepmax=5
+nstepmax=20
 dtoutput=2.
 /
 
