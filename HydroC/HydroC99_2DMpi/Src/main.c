@@ -345,10 +345,8 @@ main(int argc, char **argv) {
       }
     }
     if (H.mype == 0) {
-      if ((H.nstep % 100) == 0) {
-        fprintf(stdout, "--> step=%4d, %12.5e, %10.5e %.3lf MC/s%s\n", H.nstep, H.t, dt, cellPerCycle, outnum);
-        fflush(stdout);
-      }
+      fprintf(stdout, "--> step=%4d, %12.5e, %10.5e %.3lf MC/s%s\n", H.nstep, H.t, dt, cellPerCycle, outnum);
+      fflush(stdout);
     }
 #ifdef MPI
 #if FTI==1
