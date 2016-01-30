@@ -167,7 +167,11 @@ main(int argc, char **argv) {
 
   if (H.mype == 0)
     fprintf(stdout, "Hydro starts in %s precision.\n", ((sizeof(real_t) == sizeof(double))? "double": "single"));
+#ifdef __hermit__
+  strcpy(myhost, "hermit");
+#else
   gethostname(myhost, 255);
+#endif
   if (H.mype == 0) {
     fprintf(stdout, "Hydro: Main process running on %s\n", myhost);
   }
@@ -341,8 +345,10 @@ main(int argc, char **argv) {
       }
     }
     if (H.mype == 0) {
-	    fprintf(stdout, "--> step=%4d, %12.5e, %10.5e %.3lf MC/s%s\n", H.nstep, H.t, dt, cellPerCycle, outnum);
-      fflush(stdout);
+      if ((H.nstep % 100) == 0) {
+        fprintf(stdout, "--> step=%4d, %12.5e, %10.5e %.3lf MC/s%s\n", H.nstep, H.t, dt, cellPerCycle, outnum);
+        fflush(stdout);
+      }
     }
 #ifdef MPI
 #if FTI==1

@@ -11,6 +11,22 @@
 
  */
 
+#ifdef __hermit__
+extern unsigned int get_cpu_frequency(void);
+static unsigned long long start_tsc;
+
+inline static unsigned long long rdtsc(void)
+{
+  unsigned long lo, hi;
+  asm volatile ("rdtsc" : "=a"(lo), "=d"(hi) :: "memory");
+  return ((unsigned long long) hi << 32ULL | (unsigned long long) lo);
+}
+
+__attribute__((constructor)) static void timer_init()
+{
+  start_tsc = rdtsc();
+}
+#endif
 
 void
 psecs(struct timespec start) {
@@ -43,11 +59,18 @@ ccelaps(struct timespec start, struct timespec end) {
 struct timespec
 cclock(void) {
   struct timespec tstart;
-  clockid_t cid = CLOCK_REALTIME;
   int status = 0;
 
+#ifdef __hermit__
+  unsigned long long diff = rdtsc() - start_tsc;
+  unsigned int freq = get_cpu_frequency();
+
+  tstart.tv_sec = diff / (freq * 1000000ULL);
+  tstart.tv_nsec = ((diff - tstart.tv_sec * freq) / freq) * 1000ULL;
+#else
+  clockid_t cid = CLOCK_REALTIME;
+
   status = clock_gettime(cid, &tstart);
+#endif
   return tstart;
 }
-
-//     

@@ -46,7 +46,11 @@ knowledge of the CeCILL license and that you accept its terms.
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#ifdef __hermit__
+#include <limits.h>
+#else
 #include <values.h>
+#endif
 
 #include "parametres.h"
 #include "SplitSurface.h"

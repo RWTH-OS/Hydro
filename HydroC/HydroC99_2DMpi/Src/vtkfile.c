@@ -151,6 +151,16 @@ ToBase64(unsigned char *data, int length) {
 
 #define BINARY 1
 
+#ifdef __hermit__
+int mkdir(const char *path, mode_t mode)
+{
+  printf("Ups, we called mkdir\n");
+  exit(1);
+
+  return 0;
+}
+#endif
+
 void
 vtkwpvd(int nout, char *r) {
   char n[1024];

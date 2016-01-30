@@ -1,18 +1,18 @@
 # Link make.inc with the targeted architecture in Arch directory
 # For example : ln -s make_sp6 make.inc
 #--------------------------------------
-include ../../../Arch/make.inc
+include make.inc
 
 # OpenMP options
 #---------------
 CFLAGS += $(CFLAGS_MPI) $(DEF)
-CFLAGS += $(CFLAGS_OMP) -g
+CFLAGS += $(CFLAGS_OMP) #-g
 CFLAGS += $(CFLAGS_FTI)
-CFLAGS += -vec-report3
+#CFLAGS += -vec-report3
 LDFLAGS += $(LDFLAGS_MPI)
 LDFLAGS += $(LDFLAGS_OMP)
 LDFLAGS += $(LDFLAGS_FTI)
-LDFLAGS += -lrt
+#LDFLAGS += -lrt
 
 # Sources directories
 #--------------------

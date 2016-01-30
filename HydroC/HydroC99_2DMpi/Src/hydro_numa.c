@@ -35,7 +35,9 @@ knowledge of the CeCILL license and that you accept its terms.
 #include "hydro_numa.h"
 #include <stdlib.h>
 #include <stdio.h>
+#ifndef __hermit__
 #include <numaif.h>
+#endif
 #include <errno.h>
 
 #define ASSUMED_PAGE_SIZE 4096
@@ -50,7 +52,7 @@ void force_move_pages(const void* data_, const size_t n, const size_t selem,
   size_t i;
   long res;
 
-#ifndef __MIC__
+#if !defined(__hermit) && !defined(__MIC__)
   const int nmn = numa_num_configured_nodes();
 
   // fprintf(stderr, "%s:%d elem_per_page = %zd, nmn = %d ; np = %zd\n", __PRETTY_FUNCTION__, __LINE__, elem_per_page, nmn, np);
