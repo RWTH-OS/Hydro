@@ -52,7 +52,7 @@ void force_move_pages(const void* data_, const size_t n, const size_t selem,
   size_t i;
   long res;
 
-#if !defined(__hermit) && !defined(__MIC__)
+#if !defined(__hermit__) && !defined(__MIC__)
   const int nmn = numa_num_configured_nodes();
 
   // fprintf(stderr, "%s:%d elem_per_page = %zd, nmn = %d ; np = %zd\n", __PRETTY_FUNCTION__, __LINE__, elem_per_page, nmn, np);
