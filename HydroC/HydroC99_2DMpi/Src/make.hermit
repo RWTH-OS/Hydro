@@ -32,7 +32,7 @@ LDFLAGS = -m64 -mtls-direct-seg-refs -mno-red-zone -O3 -mavx2 -mfma -mtune=intel
 
 # OpenMP C compilation options
 #---------------------------
-CFLAGS_OMP = #-fopenmp
+CFLAGS_OMP = -fopenmp
 
 # Cuda compilation options
 #---------------------------
@@ -40,7 +40,7 @@ NVCFLAGS_OMP =
 
 # OpenMP Fortran compilation options
 #---------------------------
-FFLAGS_OMP = #-fopenmp
+FFLAGS_OMP = -fopenmp
 
 # MPI C compilation options
 #---------------------------
@@ -55,7 +55,7 @@ FFLAGS_MPI =
 
 # OpenMP link options
 #--------------------
-LDFLAGS_OMP = #-fopenmp
+LDFLAGS_OMP = -fopenmp
 
 # MPI link options
 #--------------------
