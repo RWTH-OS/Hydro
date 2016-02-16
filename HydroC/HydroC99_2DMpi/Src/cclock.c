@@ -2,6 +2,7 @@
 #include "math.h"
 #include "stdio.h"
 #include "cclock.h"
+#include "sys/time.h"
 
 /*
   A small helper function to manipulate accurate times (on LINUX).
@@ -82,9 +83,18 @@ cclock(void) {
   tstart.tv_sec = diff / (freq * 1000000ULL);
   tstart.tv_nsec = ((diff - tstart.tv_sec * freq * 1000000ULL) * 1000ULL) / freq;
 #else
+#if 1
   clockid_t cid = CLOCK_REALTIME;
 
   status = clock_gettime(cid, &tstart);
+#else
+  struct timeval t;
+
+  gettimeofday(&t, NULL);
+
+  tstart.tv_sec = t.tv_sec;
+  tstart.tv_nsec = t.tv_usec*1000;
+#endif
 #endif
   return tstart;
 }
