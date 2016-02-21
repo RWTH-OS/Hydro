@@ -20,15 +20,15 @@ MPIF90 = mpif90
 
 # C compilation options
 #-----------------------------
-CFLAGS = -m64 -O3 -mavx2 -mfma -mtune=intel
+CFLAGS = -m64 -O3 -march=native -mtune=native -fopt-info-vec
 
 # Fortran compilation options
 #-----------------------------
-FFLAGS = -m64 -O3 -mavx2 -mfma -mtune=intel
+FFLAGS = -m64 -O3 -march=native -mtune=native -fopt-info-vec
 
 # Linker options
 #---------------
-LDFLAGS = -m64 -O3 -mavx2 -mfma -mtune=intel
+LDFLAGS = -m64 -O3 -march=native -mtune=native -fopt-info-vec
 
 # OpenMP C compilation options
 #---------------------------
