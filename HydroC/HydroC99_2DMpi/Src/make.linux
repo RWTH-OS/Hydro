@@ -20,15 +20,15 @@ MPIF90 = mpif90
 
 # C compilation options
 #-----------------------------
-CFLAGS = -m64 -O3 -march=native -mtune=native -fopt-info-vec
+CFLAGS = -m64 -O3 -march=native -mtune=native #-fopt-info-vec
 
 # Fortran compilation options
 #-----------------------------
-FFLAGS = -m64 -O3 -march=native -mtune=native -fopt-info-vec
+FFLAGS = -m64 -O3 -march=native -mtune=native #-fopt-info-vec
 
 # Linker options
 #---------------
-LDFLAGS = -m64 -O3 -march=native -mtune=native -fopt-info-vec
+LDFLAGS = -m64 -O3 -march=native -mtune=native #-fopt-info-vec
 
 # OpenMP C compilation options
 #---------------------------
@@ -59,7 +59,7 @@ LDFLAGS_OMP = -fopenmp
 
 # MPI link options
 #--------------------
-LDFLAGS_MPI = -L$(MPIROOT)/lib -lmpich -lnuma -lm -lrt 
+LDFLAGS_MPI = -L$(MPIROOT)/lib -lmpich -lnuma -lrt 
 
 # FTI C compilation options
 #---------------------------
