@@ -16,15 +16,14 @@
 extern unsigned int get_cpu_frequency(void);
 static unsigned long long start_tsc;
 
-#if 0
 inline static unsigned long long rdtsc(void)
 {
   unsigned long lo, hi;
   asm volatile ("rdtsc" : "=a"(lo), "=d"(hi) :: "memory");
   return ((unsigned long long) hi << 32ULL | (unsigned long long) lo);
 }
-#endif
 
+#if 0
 inline static unsigned long long rdtscp(unsigned long* cpu_id)
 {
   unsigned long lo, hi;
@@ -36,10 +35,11 @@ inline static unsigned long long rdtscp(unsigned long* cpu_id)
 
   return ((unsigned long long)hi << 32ULL | (unsigned long long)lo);
 }
+#endif
 
 __attribute__((constructor)) static void timer_init()
 {
-  start_tsc = rdtscp(NULL);
+  start_tsc = rdtsc();
 }
 #endif
 
@@ -77,7 +77,7 @@ cclock(void) {
   int status = 0;
 
 #ifdef __hermit__
-  unsigned long long diff = rdtscp(NULL) - start_tsc;
+  unsigned long long diff = rdtsc() - start_tsc;
   unsigned int freq = get_cpu_frequency();
 
   tstart.tv_sec = diff / (freq * 1000000ULL);
