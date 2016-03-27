@@ -57,6 +57,8 @@
 #include "cclock.h"
 #include "utils.h"
 
+void reset_irq_stats(void);
+
 hydroparam_t H;
 hydrovar_t Hv;                  // nvar
 //for compute_delta
@@ -192,16 +194,16 @@ main(int argc, char **argv) {
   fprintf(stdout, "Hydro: standard build\n");
 #endif
 
-
   // PRINTUOLD(H, &Hv);
 #ifdef MPI
-  if (H.nproc > 1)
+  if (H.nproc > 1) {
 #if FTI>0
     MPI_Barrier(FTI_COMM_WORLD);
 #endif
 #if FTI==0
     MPI_Barrier(MPI_COMM_WORLD);
 #endif
+  }
 #endif
 
   if (H.dtoutput > 0) {
@@ -239,6 +241,10 @@ main(int argc, char **argv) {
   if (H.mype == 0) fprintf(stdout, "Hydro: init mem %lfs\n", ccelaps(start, end));
   // we start timings here to avoid the cost of initial memory allocation
   start_time = dcclock();
+
+#ifdef __hermit__
+  reset_irq_stats();
+#endif
 
   while ((H.t < H.tend) && (H.nstep < H.nstepmax)) {
     //system("top -b -n1");
