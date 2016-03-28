@@ -37,7 +37,6 @@
 
 #include <stdlib.h>
 #include <unistd.h>
-#include <math.h>
 #include <stdio.h>
 
 #include "parametres.h"
@@ -59,6 +58,10 @@
 
 #define PRECISION 1e-6
 
+static inline double fmin(double x, double y) { return x < y ? x : y; }
+static inline double fmax(double x, double y) { return x > y ? x : y; }
+static inline double fabs(double x) { return x < 0 ? -x : x; }
+
 void
 Dmemset(size_t nbr, real_t t[nbr], real_t motif) {
   int i;
@@ -73,6 +76,7 @@ Dmemset(size_t nbr, real_t t[nbr], real_t motif) {
 #define MAX(x,y) fmax(x,y)
 #endif
 
+double sqrt(double x);
 #define MYSQRT sqrt
 
 void

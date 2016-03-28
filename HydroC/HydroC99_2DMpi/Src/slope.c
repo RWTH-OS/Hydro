@@ -36,7 +36,6 @@ knowledge of the CeCILL license and that you accept its terms.
 
 #include <stdlib.h>
 #include <unistd.h>
-#include <math.h>
 #include <stdio.h>
 
 #include "parametres.h"
@@ -45,6 +44,10 @@ knowledge of the CeCILL license and that you accept its terms.
 #include "perfcnt.h"
 
 #ifndef HMPP
+
+static inline double fmin(double x, double y) { return x < y ? x : y; }
+static inline double fmax(double x, double y) { return x > y ? x : y; }
+static inline double fabs(double x) { return x < 0 ? -x : x; }
 
 #define DABS(x) (real_t) fabs((x))
 

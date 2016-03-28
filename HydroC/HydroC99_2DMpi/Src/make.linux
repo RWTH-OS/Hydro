@@ -59,7 +59,7 @@ LDFLAGS_OMP = -fopenmp
 
 # MPI link options
 #--------------------
-LDFLAGS_MPI = -L$(MPIROOT)/lib -lmpich -lnuma -lrt -lm
+LDFLAGS_MPI = -L$(MPIROOT)/lib -lmpich -lnuma -lrt
 
 # FTI C compilation options
 #---------------------------
