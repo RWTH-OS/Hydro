@@ -362,12 +362,9 @@ main(int argc, char **argv) {
   } // while
   end_time = dcclock();
 
-  // TODO: on HermitCore, the deallocation function are broken
-#ifndef __hermit__
   // Deallocate work spaces
   deallocate_work_space(H.nxyt, H, &Hw_godunov, &Hvw_godunov);
   compute_deltat_clean_mem(H, &Hw_deltat, &Hvw_deltat);
-#endif
 
   hydro_finish(H, &Hv);
   elaps = (double) (end_time - start_time);
